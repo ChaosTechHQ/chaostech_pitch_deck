@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChaosTech NSD v18 - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .slide {
+            width: 95%;
+            height: 95%;
+            max-width: 1600px;
+            max-height: 900px;
+            background: #0f3460;
+            border-radius: 12px;
+            padding: 60px 80px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            pointer-events: none;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0,255,136,0.5);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            text-shadow: 0 0 15px rgba(0,212,255,0.3);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #00ff88;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #a0aec0;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .content-box {
+            background: rgba(0,255,136,0.1);
+            border-left: 4px solid #00ff88;
+            padding: 20px 30px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: rgba(0,212,255,0.1);
+            border: 2px solid #00d4ff;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            color: #ff6b35;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .bullet-list li {
+            margin: 15px 0;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .bullet-list li:before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-size: 1.5rem;
+        }
+
+        .table-simple {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .table-simple th {
+            background: rgba(0,255,136,0.2);
+            border: 1px solid #00ff88;
+            padding: 12px;
+            text-align: left;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .table-simple td {
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        button {
+            background: #00ff88;
+            color: #0f3460;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,212,255,0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.2rem;
+            color: #a0aec0;
+            z-index: 100;
+        }
+
+        .highlight {
+            color: #ff6b35;
+            font-weight: 700;
+        }
+
+        .accent-box {
+            background: rgba(255,107,53,0.15);
+            border-left: 4px solid #ff6b35;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 20px 0;
+        }
+
+        .comparison-table th {
+            background: rgba(0,255,136,0.15);
+            border: 1px solid #00ff88;
+            padding: 12px;
+            text-align: center;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            border: 1px solid rgba(0,255,136,0.2);
+            padding: 10px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .checkmark {
+            color: #00ff88;
+            font-weight: 700;
+        }
+
+        .xmark {
+            color: #ff6b35;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide active">
+    <div class="slide-content">
+        <div>
+            <h1>NEURO SWARM<br>DISRUPTOR v18</h1>
+            <p class="subtitle">Industry's First Multi-Vector RF/AI Counter-UAS System</p>
+            <p class="subtitle" style="color: #ff6b35; font-weight: 600;">Bio-Acoustic + Kinetic + Frequency-Agile Jamming</p>
+        </div>
+        <div style="margin-top: 60px;">
+            <h3 style="margin-top: 0;">ChaosTech Defense LLC</h3>
+            <div style="font-size: 1.3rem; color: #a0aec0; margin: 15px 0;">
+                <strong>Founder & CEO:</strong> Daivon Brown<br>
+                <strong>Raising:</strong> $500K Pre-Seed (Hardware Prototyping)<br>
+                <strong>Live Demo:</strong> ChaosTechDefenseLLC.com/chaostech_nsd_simulator.html
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: PROBLEM -->
+<div class="slide">
+    <div class="slide-content">
+        <div>
+            <h2>🚨 Drone Swarms Are Unstoppable</h2>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>Current Reality</h3>
+                <ul class="bullet-list">
+                    <li>Enemy swarms hop 2.4G / 5.8G / 10.5G simultaneously</li>
+                    <li>Traditional jammers = friendly fire + collateral damage</li>
+                    <li>No system combines RF + acoustic + kinetic in real-time</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Critical Infrastructure Exposed</h3>
+                <ul class="bullet-list">
+                    <li><strong>Airports:</strong> ATC radar spoofed</li>
+                    <li><strong>Power Plants:</strong> SCADA compromised</li>
+                    <li><strong>Hospitals:</strong> Patient monitors jammed</li>
+                    <li><strong>Data Centers:</strong> Server access blocked</li>
+                </ul>
+            </div>
+        </div>
+        <div class="accent-box">
+            💡 DEMO: Spawn SWARM x5 → Watch RF hopping + cohesion collapse
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: MARKET -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>📊 $250B+ TAM in Defense Tech</h2>
+        <table class="table-simple">
+            <tr>
+                <th>Segment</th>
+                <th>Annual</th>
+                <th>CAGR</th>
+                <th>Target</th>
+            </tr>
+            <tr>
+                <td>Counter-UAS</td>
+                <td>$3.2B</td>
+                <td>18%</td>
+                <td>Military/Defense</td>
+            </tr>
+            <tr>
+                <td>Infrastructure Protection</td>
+                <td>$42B</td>
+                <td>12%</td>
+                <td>Gov't Protection</td>
+            </tr>
+            <tr>
+                <td>Cyber-RF Defense</td>
+                <td>$173B</td>
+                <td>13%</td>
+                <td>Network Defense</td>
+            </tr>
+            <tr>
+                <td><strong>Total Addressable</strong></td>
+                <td><strong>$250B+</strong></td>
+                <td><strong>~14%</strong></td>
+                <td><strong>Our SAM: $1-2B</strong></td>
+            </tr>
+        </table>
+        <div class="grid-2" style="margin-top: 30px;">
+            <div class="content-box">
+                <strong>Military swarm budgets doubling (FY2026)</strong>
+            </div>
+            <div class="content-box">
+                <strong>Zero multi-vector commercial solutions exist</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: SOLUTION -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>💡 NSD v18: 3-Layer Swarm Defense</h2>
+        <div class="grid-3">
+            <div class="metric-card">
+                <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+                <h3 style="font-size: 1.5rem; margin-top: 0;">DETECT</h3>
+                <p style="font-size: 0.95rem; margin-top: 10px;">Multi-band RF fingerprinting • Formation recognition • AI prediction engine</p>
+            </div>
+            <div class="metric-card">
+                <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+                <h3 style="font-size: 1.5rem; margin-top: 0;">DISRUPT</h3>
+                <p style="font-size: 0.95rem; margin-top: 10px;">Frequency-Agile Jamming (60-89%) • Acoustic Decoy (20-89% panic) • Kinetic Interceptor (80% capture)</p>
+            </div>
+            <div class="metric-card">
+                <div style="font-size: 2rem; margin-bottom: 10px;">🛡️</div>
+                <h3 style="font-size: 1.5rem; margin-top: 0;">DEFEND</h3>
+                <p style="font-size: 0.95rem; margin-top: 10px;">Triangulation (±5-20m) • Collateral avoidance • Infrastructure protocols</p>
+            </div>
+        </div>
+        <div class="accent-box" style="margin-top: 30px;">
+            💡 DEMO: RF Lock → Acoustic Decoy → Kinetic Launch
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: DETECTION -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>👁️ Core Capabilities: DETECTION</h2>
+        <div class="grid-2">
+            <div>
+                <h3>Real-time Swarm Detection</h3>
+                <ul class="bullet-list">
+                    <li>50+ drone tracking</li>
+                    <li>Formation recognition (DIAMOND/LINE/WEDGE)</li>
+                    <li>Threat levels: CRITICAL/HIGH/MEDIUM</li>
+                </ul>
+            </div>
+            <div>
+                <h3>RF Spectrum Analysis</h3>
+                <ul class="bullet-list">
+                    <li>Live 2.4G/5.8G/10.5G monitoring</li>
+                    <li>Hop rate detection (NORMAL/FAST/EXTREME)</li>
+                    <li>Drone fingerprinting by signature</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-box" style="margin-top: 30px;">
+            <h3 style="margin-top: 0; font-size: 1.3rem;">Predict AI Engine</h3>
+            <ul class="bullet-list" style="margin: 15px 0 0 0;">
+                <li>Approaching threats + avg speed + ETA</li>
+                <li>60-95% confidence scoring</li>
+                <li>Preemptive countermeasure triggers</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: DISRUPTION -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>⚔️ Core Capabilities: DISRUPTION</h2>
+        <div class="grid-3">
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">Frequency-Agile Jamming</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Adaptive RF lock (60-89% efficacy)</li>
+                    <li>Tracks hops in real-time</li>
+                    <li>Hardened drone resistance (60-90%)</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">Bio-Mimetic Acoustic Decoy</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Emits 20-50 fake signatures</li>
+                    <li>Swarm panic (20-89% abort)</li>
+                    <li>Cohesion destruction</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">Kinetic Interceptor</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Autonomous launch + pursuit</li>
+                    <li>80% capture rate</li>
+                    <li>Physical neutralization</li>
+                </ul>
+            </div>
+        </div>
+        <div class="accent-box" style="margin-top: 30px;">
+            💡 DEMO: Deploy all 3 → Watch jam efficacy + panic + captures rise
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: INFRASTRUCTURE -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🏢 Infrastructure Vulnerability Mapping</h2>
+        <div class="grid-2">
+            <div>
+                <h3 style="font-size: 1.3rem;">✈️ Airports</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>ATC Radar: 5.8G/10.5G → Spoofed</li>
+                    <li>ILS Guidance: GPS + 2.4G → Landing failures</li>
+                    <li>Runway Lights: WiFi → Blackout</li>
+                </ul>
+                <h3 style="font-size: 1.3rem;">⚡ Power Plants</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>SCADA: LTE → Control lost</li>
+                    <li>Turbines: 915MHz → Failure</li>
+                    <li>Breakers: Cellular → Cascade</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size: 1.3rem;">🏥 Hospitals</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Monitors: WiFi → Vital signs lost</li>
+                    <li>Surgery Robots: Bluetooth → Halt</li>
+                    <li>Pumps: ISM → Dosage errors</li>
+                </ul>
+                <h3 style="font-size: 1.3rem;">🖥️ Data Centers</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Servers: 5.8G → Remote lockout</li>
+                    <li>Cooling: WiFi → Thermal shutdown</li>
+                    <li>Power: LTE → Blackout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: PRECISION METRICS -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🎯 Precision Metrics (Live Dashboard)</h2>
+        <div class="grid-3">
+            <div class="metric-card">
+                <div class="metric-label">Detection Speed</div>
+                <div class="metric-value">500-2000ms</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Mitigation Success</div>
+                <div class="metric-value">60-95%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Reliability</div>
+                <div class="metric-value">95-100%</div>
+            </div>
+        </div>
+        <h3 style="margin-top: 40px; margin-bottom: 20px;">Environmental Impact</h3>
+        <ul class="bullet-list">
+            <li>Rain: <span class="highlight">-22%</span> | Storm: <span class="highlight">-28%</span> | Urban: <span class="highlight">-8%</span> | Mountain: <span class="highlight">-10%</span></li>
+        </ul>
+        <h3 style="margin-top: 30px; margin-bottom: 20px;">Triangulation Accuracy</h3>
+        <ul class="bullet-list">
+            <li>Signal: <span class="highlight">-75 to -95 dBm</span> | Accuracy: <span class="highlight">±5-20m</span> | Live coordinates</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SLIDE 9: RF COVERAGE -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>📡 Multi-Frequency Coverage + Hopping Defense</h2>
+        <div class="grid-2">
+            <div>
+                <h3>Primary Bands</h3>
+                <ul class="bullet-list">
+                    <li><strong>2.4GHz:</strong> WiFi/Bluetooth</li>
+                    <li><strong>5.8GHz:</strong> WiFi 6/Radar</li>
+                    <li><strong>10.5GHz:</strong> Advanced ISM</li>
+                </ul>
+                <h3 style="margin-top: 30px;">Adaptive RF Lock</h3>
+                <ul class="bullet-list">
+                    <li>Detects hop patterns</li>
+                    <li>Locks dominant band</li>
+                    <li>Tracks switches in real-time</li>
+                </ul>
+            </div>
+            <div class="accent-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Why Competitors Fail</h3>
+                <ul class="bullet-list">
+                    <li>Static jamming = predictable evasion</li>
+                    <li>Single-band = easy bypass</li>
+                    <li>No hop prediction = swarm escape</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 0.95rem; color: #00ff88;"><strong>NSD: Frequency-agile + AI prediction = complete denial</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: COMPETITION -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🏆 Competitive Landscape</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Capability</th>
+                <th>Raytheon</th>
+                <th>DJI</th>
+                <th>Leonardo</th>
+                <th>Anduril</th>
+                <th style="background: rgba(255,107,53,0.25);">NSD v18</th>
+            </tr>
+            <tr>
+                <td><strong>Detection</strong></td>
+                <td><span class="checkmark">✓</span></td>
+                <td><span class="checkmark">✓</span></td>
+                <td><span class="checkmark">✓</span></td>
+                <td><span class="checkmark">✓</span></td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="checkmark">✓ + Formation</span></td>
+            </tr>
+            <tr>
+                <td><strong>Selective Jam</strong></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="checkmark">✓</span></td>
+                <td><span class="checkmark">✓</span></td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="checkmark">✓ + Freq-Agile</span></td>
+            </tr>
+            <tr>
+                <td><strong>Acoustic Decoy</strong></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="checkmark">✓ 20-89%</span></td>
+            </tr>
+            <tr>
+                <td><strong>Kinetic Intercept</strong></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td>Partial</td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="checkmark">✓ 80%</span></td>
+            </tr>
+            <tr>
+                <td><strong>AI Prediction</strong></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td><span class="xmark">✗</span></td>
+                <td>Partial</td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="checkmark">✓ ETA</span></td>
+            </tr>
+        </table>
+        <div class="accent-box" style="margin-top: 25px;">
+            <strong>🎯 Only 3-vector (RF + Acoustic + Kinetic) system in market</strong>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: GO-TO-MARKET -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🎯 Go-to-Market: Dual Track Revenue</h2>
+        <div class="grid-3">
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">B2B2G Licensing</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Prime contractors</li>
+                    <li>$50-100M annual</li>
+                    <li>Fastest path</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">Direct Gov Sales</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Army/Air Force/Space Force</li>
+                    <li>$5-15M deployments</li>
+                    <li>10-15 bases (Y2-3)</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="font-size: 1.3rem;">Infrastructure</h3>
+                <ul class="bullet-list" style="font-size: 0.95rem;">
+                    <li>Airports: $1-2M</li>
+                    <li>Power plants: $2-5M</li>
+                    <li>Data centers: $500K-1M</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: FINANCIALS -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>📈 Revenue Projections (Conservative)</h2>
+        <table class="table-simple">
+            <tr>
+                <th>Year</th>
+                <th>Licensing</th>
+                <th>Gov Sales</th>
+                <th>Infrastructure</th>
+                <th style="background: rgba(255,107,53,0.25);">TOTAL</th>
+            </tr>
+            <tr>
+                <td><strong>2026</strong></td>
+                <td>$0</td>
+                <td><span class="highlight">$3M</span></td>
+                <td>$750K</td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="highlight">$3.75M</span></td>
+            </tr>
+            <tr>
+                <td><strong>2027</strong></td>
+                <td>$30M</td>
+                <td><span class="highlight">$12M</span></td>
+                <td>$5M</td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="highlight">$47M</span></td>
+            </tr>
+            <tr>
+                <td><strong>2028</strong></td>
+                <td>$90M</td>
+                <td><span class="highlight">$25M</span></td>
+                <td>$12M</td>
+                <td style="background: rgba(255,107,53,0.2);"><span class="highlight">$127M</span></td>
+            </tr>
+        </table>
+        <div class="accent-box" style="margin-top: 30px;">
+            <strong>Updated Assumptions:</strong> 2 licensing deals (Year 2) • <span class="highlight">3 military pilots</span> (2026) • 8-12 infra contracts • 45% licensing margins, 65% direct
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: USE OF FUNDS -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>💰 $500K Pre-Seed: Hardware + Pilots</h2>
+        <table class="table-simple">
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><strong>Hardware Proto</strong></td>
+                <td><span class="highlight">$200K</span></td>
+                <td>RF modules + acoustic emitters + kinetic drones</td>
+            </tr>
+            <tr>
+                <td>Engineering</td>
+                <td>$120K</td>
+                <td>Firmware + AI optimization + field testing</td>
+            </tr>
+            <tr>
+                <td><strong>Gov't Pilots</strong></td>
+                <td><span class="highlight">$100K</span></td>
+                <td>Army/Space Force demo deployments</td>
+            </tr>
+            <tr>
+                <td>Compliance</td>
+                <td>$40K</td>
+                <td>ITAR/EAR + CAGE/SAM.gov</td>
+            </tr>
+            <tr>
+                <td>Operations</td>
+                <td>$40K</td>
+                <td>Legal + accounting + travel</td>
+            </tr>
+        </table>
+        <h3 style="margin-top: 30px;">Key Milestones</h3>
+        <ul class="bullet-list">
+            <li><strong>Q1 2026:</strong> Hardware prototype complete</li>
+            <li><strong>Q2 2026:</strong> First military pilot (Army base)</li>
+            <li><strong>Q4 2026:</strong> Series A ready ($10M target)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SLIDE 14: TEAM -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>👥 The Team</h2>
+        <div class="content-box" style="margin-bottom: 30px;">
+            <h3 style="margin-top: 0; font-size: 1.4rem;">Daivon Brown - Founder & CEO</h3>
+            <ul class="bullet-list">
+                <li>Counter-UAS expert (6+ months intensive dev)</li>
+                <li>Built v18 simulator (RF hopping + 3 modules)</li>
+                <li><strong style="color: #ff6b35;">Full-time available: January 18, 2026</strong></li>
+                <li>Investor outreach: Boost VC + 50+ VCs contacted</li>
+            </ul>
+        </div>
+        <h3>Hiring Now: Technical Co-Founder/CTO</h3>
+        <ul class="bullet-list">
+            <li>10+ yrs RF/firmware + defense tech</li>
+            <li>Equity: 15-20%</li>
+        </ul>
+        <h3 style="margin-top: 30px;">Advisors (Recruiting)</h3>
+        <ul class="bullet-list">
+            <li>Ex-Army acquisition officer</li>
+            <li>Lockheed Ventures partner</li>
+            <li>DIU program manager</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SLIDE 15: TRACTION -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🚀 Traction: Live MVP + Market Validation</h2>
+        <h3>NSD v18 Simulator Live (ChaosTechDefenseLLC.com)</h3>
+        <ul class="bullet-list">
+            <li>RF hopping detection + adaptive lock (60-89% efficacy)</li>
+            <li>Bio-acoustic decoy (20-89% panic/abort rates)</li>
+            <li>Kinetic interceptor (80% capture success)</li>
+            <li>5K+ lines production JavaScript + live GitHub</li>
+        </ul>
+        <h3>Government/Market Progress</h3>
+        <ul class="bullet-list">
+            <li>SAM.gov + CAGE code pathway mapped</li>
+            <li><span class="highlight">Boost VC analyst meeting scheduled</span></li>
+            <li>5 prime contractors contacted (NDA ready)</li>
+            <li>ITAR compliance roadmap complete</li>
+        </ul>
+        <h3>Founder Commitment</h3>
+        <ul class="bullet-list">
+            <li><span class="highlight">Full-time January 18, 2026</span> (10 days away)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SLIDE 16: RISKS -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>⚠️ Risk Mitigation</h2>
+        <table class="table-simple">
+            <tr>
+                <th>Risk</th>
+                <th>Mitigation Status</th>
+            </tr>
+            <tr>
+                <td><strong>ITAR/EAR</strong></td>
+                <td><span class="checkmark">✓ Legal roadmap complete, counsel retained</span></td>
+            </tr>
+            <tr>
+                <td><strong>CTO Hire</strong></td>
+                <td><span class="checkmark">✓ 3 candidates interviewing, offer ready</span></td>
+            </tr>
+            <tr>
+                <td><strong>Gov Sales Cycle</strong></td>
+                <td><span class="checkmark">✓ Prime contractor path = 6-9mo vs 24mo</span></td>
+            </tr>
+            <tr>
+                <td><strong>Tech Competition</strong></td>
+                <td><span class="checkmark">✓ 3-vector approach = insurmountable moat</span></td>
+            </tr>
+            <tr>
+                <td><strong>Hardware Supply</strong></td>
+                <td><span class="checkmark">✓ Commercial RF components (non-restricted)</span></td>
+            </tr>
+            <tr>
+                <td><strong>Pilot Validation</strong></td>
+                <td><span class="checkmark">✓ Live v18 demo + Boost VC validation</span></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- SLIDE 17: ASK -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>💵 Investment Ask: $500K Pre-Seed</h2>
+        <div class="grid-2">
+            <div class="content-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Why $500K?</h3>
+                <ul class="bullet-list">
+                    <li>Hardware prototyping (RF + acoustic + kinetic)</li>
+                    <li>3 military pilots (Q2 2026)</li>
+                    <li>CTO hire + field testing</li>
+                    <li>18-month runway to Series A</li>
+                </ul>
+            </div>
+            <div class="accent-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Terms</h3>
+                <ul class="bullet-list">
+                    <li><strong>Pre-money:</strong> $3.5M</li>
+                    <li><strong>$500K = 12.5% equity</strong></li>
+                    <li><strong>Series A:</strong> $10-15M (Q4 2026)</li>
+                    <li><strong>Exit:</strong> $500M+ (Raytheon/Lockheed)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 18: MILESTONES -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>📅 12-Month Success Roadmap</h2>
+        <div class="grid-3">
+            <div class="metric-card">
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Q1 2026</h3>
+                <p style="font-size: 0.95rem;"><strong>Foundation</strong></p>
+                <ul class="bullet-list" style="font-size: 0.85rem; margin-top: 10px;">
+                    <li>Hardware prototype</li>
+                    <li>CTO onboarded</li>
+                    <li>CAGE/SAM.gov certified</li>
+                </ul>
+            </div>
+            <div class="metric-card">
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Q2 2026</h3>
+                <p style="font-size: 0.95rem;"><strong>Validation</strong></p>
+                <ul class="bullet-list" style="font-size: 0.85rem; margin-top: 10px;">
+                    <li><span class="highlight">3 military pilots</span></li>
+                    <li>Field test data</li>
+                    <li>Licensing discussions</li>
+                </ul>
+            </div>
+            <div class="metric-card">
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Q3-Q4 2026</h3>
+                <p style="font-size: 0.95rem;"><strong>Scale</strong></p>
+                <ul class="bullet-list" style="font-size: 0.85rem; margin-top: 10px;">
+                    <li>Series A ($10-15M)</li>
+                    <li>5 infra contracts</li>
+                    <li>Production release</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 19: TIMING -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>⏰ Perfect Storm Opportunity</h2>
+        <div class="grid-3">
+            <div class="content-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Market</h3>
+                <ul class="bullet-list">
+                    <li>Counter-UAS budgets doubling (FY2026)</li>
+                    <li>Swarm proliferation accelerating</li>
+                    <li>Zero multi-vector solutions</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Founder</h3>
+                <ul class="bullet-list">
+                    <li><span class="highlight">Full-time January 18</span></li>
+                    <li>v18 simulator live</li>
+                    <li>50+ VC conversations</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3 style="margin-top: 0; font-size: 1.3rem;">Capital</h3>
+                <ul class="bullet-list">
+                    <li>Defense VCs hunting counter-UAS</li>
+                    <li>Boost VC interest</li>
+                    <li>Attractive valuation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 20: CALL TO ACTION -->
+<div class="slide">
+    <div class="slide-content">
+        <div style="text-align: center;">
+            <h1 style="font-size: 3.5rem;">🤝 Join the Multi-Vector<br>Defense Revolution</h1>
+            <h3 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 40px;">$500K builds:</h3>
+            <ul class="bullet-list" style="max-width: 600px; margin: 0 auto;">
+                <li>Hardware prototypes (all 3 modules)</li>
+                <li>Military pilots (Q2 2026)</li>
+                <li>CTO + field testing team</li>
+                <li>Series A pathway (Q4 2026)</li>
+            </ul>
+            <h3 style="margin-top: 50px; font-size: 1.3rem;">Next Steps:</h3>
+            <div style="margin-top: 30px; font-size: 1.1rem; line-height: 2;">
+                <p>1. <strong>Live Demo</strong> (5 min walkthrough)</p>
+                <p>2. <strong>Technical Deep-Dive</strong> (CTO candidate)</p>
+                <p>3. <strong>Gov't Intro Calls</strong> (Army/DIU)</p>
+                <p>4. <strong>Term Sheet</strong> (2 weeks)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 21: DEMO SCRIPT -->
+<div class="slide">
+    <div class="slide-content">
+        <h2>🎮 Live v18 Demo Walkthrough</h2>
+        <p style="font-size: 1.2rem; margin: 20px 0; color: #00d4ff;"><strong>https://ChaosTechDefenseLLC.com/chaostech_nsd_simulator.html</strong></p>
+        <ol style="list-style: decimal; margin: 30px 0; margin-left: 30px; font-size: 1.1rem; line-height: 2.2;">
+            <li><strong style="color: #ff6b35;">SWARM x5</strong> → Hostile drones spawn + RF hopping</li>
+            <li><strong style="color: #ff6b35;">DIAMOND formation</strong> → Cohesion TIGHT→FRAGMENTED</li>
+            <li><strong style="color: #ff6b35;">ADAPTIVE RF LOCK</strong> → Jam efficacy 60-89% (hops tracked)</li>
+            <li><strong style="color: #ff6b35;">ACOUSTIC DECOY</strong> → Panic levels 20-89% + abort probability</li>
+            <li><strong style="color: #ff6b35;">KINETIC INTERCEPTOR</strong> → 80% capture success (live pursuit)</li>
+            <li><strong style="color: #ff6b35;">EXPORT AAR</strong> → Military after-action report generated</li>
+        </ol>
+        <div class="accent-box" style="margin-top: 40px;">
+            <h3 style="margin-top: 0; font-size: 1.3rem;">Key Line:</h3>
+            <p style="margin: 15px 0 0 0;"><strong style="color: #00ff88;">"RF + Acoustic + Kinetic = Unstoppable Swarm Defense"</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 22: CONTACT -->
+<div class="slide">
+    <div class="slide-content">
+        <div style="text-align: center;">
+            <h2 style="font-size: 3rem;">📞 Let's Build Swarm Defense</h2>
+            <div style="margin-top: 60px; font-size: 1.3rem;">
+                <p><strong>Daivon Brown</strong></p>
+                <p style="color: #a0aec0;">Founder & CEO, ChaosTech Defense LLC</p>
+                <div style="margin-top: 40px; font-size: 1.1rem;">
+                    <p>📧 <span style="color: #00d4ff;">[your-email]</span></p>
+                    <p>📱 <span style="color: #00d4ff;">[your-phone]</span></p>
+                </div>
+            </div>
+            <div style="margin-top: 60px; border-top: 2px solid #00ff88; padding-top: 30px;">
+                <p style="font-size: 1rem; color: #a0aec0;">🎮 Live Demo: <strong style="color: #00d4ff;">ChaosTechDefenseLLC.com/chaostech_nsd_simulator.html</strong></p>
+                <p style="font-size: 1rem; color: #a0aec0; margin-top: 10px;">🐙 GitHub: <strong style="color: #00d4ff;">github.com/[username]/chaostech-nsd</strong></p>
+                <p style="font-size: 0.95rem; color: #a0aec0; margin-top: 20px;">One-Pager + Technical Specs Available | Schedule Demo + Deep-Dive Call Today</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-bar">
+    <button onclick="previousSlide()">← PREVIOUS</button>
+    <button onclick="nextSlide()">NEXT →</button>
+</div>
+
+<div class="slide-number">
+    <span id="current-slide">1</span> / <span id="total-slides">22</span>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    
+    document.getElementById('total-slides').textContent = totalSlides;
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+        document.getElementById('current-slide').textContent = n + 1;
+        
+        document.querySelector('button:nth-child(1)').disabled = n === 0;
+        document.querySelector('button:nth-child(2)').disabled = n === totalSlides - 1;
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function previousSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') previousSlide();
+    });
+
+    showSlide(0);
+</script>
+
+</body>
+</html>
